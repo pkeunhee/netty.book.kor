@@ -40,9 +40,6 @@ import org.apache.logging.log4j.Logger;
 import com.google.gson.JsonObject;
 
 public class ApiRequestParser extends SimpleChannelInboundHandler<FullHttpMessage> {
-    /**
-     * log4j logger
-     */
     private static final Logger logger = LogManager.getLogger(ApiRequestParser.class);
 
     private HttpRequest request;
@@ -104,7 +101,6 @@ public class ApiRequestParser extends SimpleChannelInboundHandler<FullHttpMessag
 
                 try {
                     service.executeService();
-
                     apiResult = service.getApiResult();
                 }
                 finally {
@@ -159,8 +155,8 @@ public class ApiRequestParser extends SimpleChannelInboundHandler<FullHttpMessag
         boolean keepAlive = HttpHeaders.isKeepAlive(request);
         // Build the response object.
         FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1,
-                currentObj.getDecoderResult().isSuccess() ? OK : BAD_REQUEST, Unpooled.copiedBuffer(
-                        apiResult.toString(), CharsetUtil.UTF_8));
+                currentObj.getDecoderResult().isSuccess() ? OK : BAD_REQUEST,
+                Unpooled.copiedBuffer(apiResult.toString(), CharsetUtil.UTF_8));
 
         response.headers().set(CONTENT_TYPE, "application/json; charset=UTF-8");
 

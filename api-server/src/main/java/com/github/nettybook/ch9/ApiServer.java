@@ -39,7 +39,7 @@ public final class ApiServer {
             b.group(bossGroup, workerGroup)
             .channel(NioServerSocketChannel.class)
             .handler(new LoggingHandler(LogLevel.INFO))
-            .childHandler(new ApiServerInitializer(null));
+            .childHandler(new ApiServerInitializer(null)); // http 지원인 경우 null 로 
 
             Channel ch = b.bind(8080).sync().channel();
 
