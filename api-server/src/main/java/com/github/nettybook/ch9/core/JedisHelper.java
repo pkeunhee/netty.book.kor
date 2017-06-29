@@ -10,7 +10,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 public class JedisHelper {
-    protected static final String REDIS_HOST = "127.0.0.1";
+    protected static final String REDIS_HOST = "www.ghp.pe.kr";
     // protected static final String REDIS_HOST = "192.168.56.1";
     protected static final int REDIS_PORT = 6379;
     private final Set<Jedis> connectionList = new HashSet<Jedis>();
@@ -24,7 +24,7 @@ public class JedisHelper {
         config.setMaxTotal(20);
         config.setBlockWhenExhausted(true);
 
-        this.pool = new JedisPool(config, REDIS_HOST, REDIS_PORT);
+        this.pool = new JedisPool(config, REDIS_HOST, REDIS_PORT, 10000, "passhere!", 0);
     }
 
     /**
